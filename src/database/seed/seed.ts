@@ -4,6 +4,7 @@ import { SeedInsertCountriesService } from './insert-countries/seed.insert-count
 import { SeedCreateDatabaseModule } from './create-database/seed.create-database.module';
 import { SeedInserCountriesModule } from './insert-countries/seed.insert-countries.module';
 import { Logger } from '@nestjs/common';
+import axios from 'axios';
 
 const insertCountries = async () => {
   const appInserCountriesContext =
