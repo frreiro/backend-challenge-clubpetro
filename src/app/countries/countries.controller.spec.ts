@@ -8,10 +8,12 @@ describe('CountriesController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CountriesController],
-      providers: [CountriesService],
+      providers: [CountriesService]
     }).compile();
 
-    controller = module.get<CountriesController>(CountriesController);
+    controller = module.get<CountriesController>(
+      CountriesController
+    );
   });
 
   it('should be defined', () => {

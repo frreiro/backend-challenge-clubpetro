@@ -1,4 +1,4 @@
-import { Country } from 'src/countries/entities/country.entity';
+import { Country } from 'src/app/countries/entities/country.entity';
 import {
   Column,
   Entity,

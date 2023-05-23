@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { LocationsModule } from './locations/locations.module';
 import { CountriesModule } from './countries/countries.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeormConfig } from './database/typeorm.config';
+import { typeormConfig } from '../database/typeorm.config';
 
 //TODO: remove app.controller
 @Module({
