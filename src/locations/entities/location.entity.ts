@@ -12,13 +12,19 @@ export class Location {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => Country)
-  @JoinColumn()
-  country: Country;
+  @Column()
+  name: string;
+
+  @Column()
+  goal: Date;
 
   @Column()
   created_at: Date;
 
   @Column()
   updated_at: Date;
+
+  @OneToOne(() => Country)
+  @JoinColumn()
+  country: Country;
 }
