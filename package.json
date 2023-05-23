@@ -7,19 +7,19 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "prestart": "ts-node src/database/seed/createDatabase.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "npm run prestart && nest start",
-    "start:dev": "npm run prestart && nest start --watch",
-    "start:debug": "npm run prestart && nest start --debug --watch",
-    "start:prod": "npm run prestart && node dist/main",
+    "start": "npm run seed && nest start",
+    "start:dev": "npm run seed && nest start --watch",
+    "start:debug": "npm run seed && nest start --debug --watch",
+    "start:prod": "npm run seed && node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+	"seed": "ts-node -r tsconfig-paths/register src/database/seed/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
