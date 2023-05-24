@@ -1,30 +1,38 @@
 import { Country } from 'src/app/countries/entities/country.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  Unique,
+  UpdateDateColumn
 } from 'typeorm';
 
 @Entity('locations')
+@Unique(['name', 'country'])
 export class Location {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column()
   name: string;
 
-  @Column()
+  @Column({ type: 'timestamp without time zone' })
   goal: Date;
 
-  @Column()
+  @CreateDateColumn()
   created_at: Date;
 
-  @Column()
+  @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToOne(() => Country)
+  @ManyToOne(() => Country)
   @JoinColumn()
   country: Country;
+
+  constructor(createLocation?: Location) {
+    Object.assign(this, createLocation);
+  }
 }

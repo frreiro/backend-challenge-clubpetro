@@ -20,5 +20,6 @@ export const typeormConfig: ItypeormConfig = {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DATABASE_NAME,
   autoLoadEntities: true,
-  synchronize: true
+  synchronize: true,
+  useUTC: true
 };
