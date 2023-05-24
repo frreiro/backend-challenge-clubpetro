@@ -91,11 +91,40 @@ export class LocationsService {
     return `This action returns a #${id} location`;
   }
 
-  update(id: number, updateLocationDto: UpdateLocationDto) {
-    return `This action updates a #${id} location`;
+  async update(id: number, updateLocationDto: UpdateLocationDto) {
+    const existLocationName =
+      await this.locationsRepository.findOneBy({
+        id: id
+      });
+
+    if (!existLocationName || !Object.keys(updateLocationDto).length)
+      throw new HttpException(
+        'Local do not exist',
+        HttpStatus.UNPROCESSABLE_ENTITY
+      );
+
+    const partityLocation: Partial<Location> = {};
+    if (updateLocationDto.goal) {
+      const month = updateLocationDto.goal.split('/')[0];
+      const year = updateLocationDto.goal.split('/')[1];
+      const parsedDateToBrazilTZ = dayjs(`${year}-${month}-01`)
+        .tz('America/Sao_Paulo')
+        .toDate();
+      partityLocation.goal = parsedDateToBrazilTZ;
+    } else {
+      partityLocation.name = updateLocationDto.local;
+    }
+    return this.locationsRepository.update(
+      {
+        id: id
+      },
+      partityLocation
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} location`;
+  async remove(id: number) {
+    return await this.locationsRepository.delete({
+      id: id
+    });
   }
 }

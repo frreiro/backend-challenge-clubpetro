@@ -3,14 +3,13 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
-  Delete
+  Delete,
+  Put
 } from '@nestjs/common';
 import { LocationsService } from './locations.service';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { UpdateLocationDto } from './dto/update-location.dto';
-import { Country } from '../countries/entities/country.entity';
 
 @Controller('locations')
 export class LocationsController {
@@ -22,25 +21,28 @@ export class LocationsController {
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.locationsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.locationsService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(
+  @Put(':id')
+  async update(
     @Param('id') id: string,
     @Body() updateLocationDto: UpdateLocationDto
   ) {
-    return this.locationsService.update(+id, updateLocationDto);
+    return await this.locationsService.update(
+      +id,
+      updateLocationDto
+    );
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.locationsService.remove(+id);
+  async remove(@Param('id') id: string) {
+    return await this.locationsService.remove(+id);
   }
 }
