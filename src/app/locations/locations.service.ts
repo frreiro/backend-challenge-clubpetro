@@ -118,7 +118,10 @@ export class LocationsService {
       {
         id: id
       },
-      partityLocation
+      {
+        ...partityLocation,
+        updated_at: dayjs().tz('America/Sao_Paulo').toDate()
+      }
     );
   }
 
