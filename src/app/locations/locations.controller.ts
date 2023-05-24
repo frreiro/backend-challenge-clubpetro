@@ -5,7 +5,9 @@ import {
   Body,
   Param,
   Delete,
-  Put
+  Put,
+  HttpException,
+  HttpStatus
 } from '@nestjs/common';
 import { LocationsService } from './locations.service';
 import { CreateLocationDto } from './dto/create-location.dto';
@@ -35,6 +37,13 @@ export class LocationsController {
     @Param('id') id: string,
     @Body() updateLocationDto: UpdateLocationDto
   ) {
+    if (!updateLocationDto.goal && !updateLocationDto.local) {
+      throw new HttpException(
+        'Must insert local or goal',
+        HttpStatus.UNPROCESSABLE_ENTITY
+      );
+    }
+
     return await this.locationsService.update(
       +id,
       updateLocationDto
